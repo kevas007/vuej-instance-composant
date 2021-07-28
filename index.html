@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div id="app">
+    <mon-composant></mon-composant>
+    <mon-composant></mon-composant>
+    <mon-composant></mon-composant>
+    </div>
+    <div id="app2">
+    <p>{{ text }}</p>
+
+    <button v-on:click ="changeText2">Change</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        Vue.component('mon-composant',{
+            template:'<p>Mon composant {{ nom }} <button v-on:click="changeText">Changement</button> </p>',
+            data:function(){
+                return {
+                    nom: "kev"
+                }
+            },
+            methods:{
+                changeText:function(){
+                    this.nom = "kevin";
+                }
+            }
+        });
+        const inst1=  new Vue({
+            el: '#app',
+            data: {
+                text: 'Hello app1'
+            }, 
+        });
+        const inst2=  new Vue({
+            el: '#app2',
+            data: {
+                text: 'Hello app2'
+            }, 
+            methods: {
+                changeText2: function () {
+                    inst1.text = 'Hello app1 changé';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
